@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxq.violation.mapper.CarerMapper">
+
+    <!--    /**
+     * 注册一个车主信息
+     * @param carer
+     * @return
+     */
+    public boolean insertCarer(Carer carer);
+     -->
+    <insert id="insertCarer" parameterType="com.hxq.violation.bean.Carer">
+        INSERT INTO carer(id,name,password,phone,carNumber,city) VALUES (#{carer.id},#{carer.name},#{carer.password},#{carer.phone},#{carer.carNumber},#{carer.city})
+    </insert>
+
+
+    <!--/**
+     * 查询所有车主的信息
+     * @return
+     */
+    public List<Carer> findAllCarers();-->
+    <select id="findAllCarers" resultType="com.hxq.violation.bean.Carer">
+        SELECT * FROM carer
+    </select>
+
+    <!--
+    /**
+     * 通过id和password查询一个车主，用于登陆
+     * @param id
+     * @param password
+     * @return
+     */
+    public Carer findCarerByIdPass(Integer id,String password);-->
+    <select id="findCarerByIdPass" resultType="com.hxq.violation.bean.Carer">
+        SELECT * FROM carer WHERE id=#{id} AND password=#{password}
+    </select>
+
+    <!--/**
+     * 通过id删除车主信息，由管理员操作
+     * @param id
+     * @return
+     */
+    public void deleteCarerById(Integer id);-->
+    <delete id="deleteCarerById">
+        DELETE FROM carer WHERE id=#{id}
+    </delete>
+
+    <!--/**
+     * 通过名字查询车主信息，警察操作
+     * @param name
+     * @return
+     */
+    public Carer findCarerByName(String name);-->
+    <select id="findCarerByName" resultType="com.hxq.violation.bean.Carer">
+        SELECT * FROM carer WHERE name=#{name}
+    </select>
+
+    <!--/**
+     * 通过车牌号查询车主信息
+     * @param carNumber
+     * @return
+     */
+    public Carer findCarerByCarNumber(String carNumber);-->
+    <select id="findCarerByCarNumber" resultType="com.hxq.violation.bean.Carer">
+        SELECT * FROM carer WHERE carNumber=#{carNumber}
+    </select>
+
+    <!-- /**
+     * 更新车主信息，车主修改个人信息
+     * @param carer
+     * @return
+     */
+    public void updateCarer(Carer carer);-->
+    <update id="updateCarer" parameterType="com.hxq.violation.bean.Carer">
+        UPDATE carer SET name=#{carer.name},password=#{carer.password},phone=#{carer.phone},carNumber=#{carer.carNumber},city=#{carer.city} WHERE id=#{carer.id}
+    </update>
+
+    <!-- /**
+     * 通过id查找一个车主
+     * @param id
+     * @return
+     */
+    public Carer findCarById(Integer id);-->
+
+    <select id="findCarById" resultType="com.hxq.violation.bean.Carer">
+        SELECT * from carer WHERE id=#{id}
+    </select>
+
+</mapper>
