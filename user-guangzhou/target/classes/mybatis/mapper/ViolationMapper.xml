@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxq.violation.mapper.ViolationMapper">
+    <!-- /**
+     * 添加一个罚单
+     * @param violation
+     * @return
+     */
+    public boolean insertViolation(Violation violation);-->
+    <insert id="insertViolation" parameterType="com.hxq.violation.bean.Violation">
+        INSERT INTO violation(cId,cName,carNumber,cPhone,pId,pName,description,isPay,time,city) VALUES (#{violation.cId},#{violation.cName},#{violation.carNumber},#{violation.cPhone},#{violation.pId},#{violation.pName},#{violation.description},#{violation.isPay},#{violation.time},#{violation.city})
+    </insert>
+
+    <!-- /**
+     * 通过车主的id查询罚单，车主操作
+     * @param cId
+     * @return
+     */
+    public List<Violation> findAllByCid(Integer cId);-->
+    <select id="findAllByCid" resultType="com.hxq.violation.bean.Violation">
+        SELECT * FROM violation WHERE cId=#{cId}
+    </select>
+
+    <!--/**
+     * 通过车主的名字查询订单
+     * @param cName
+     * @return
+     */
+    public  List<Violation> findAllByCname(String cName);-->
+    <select id="findAllByCname" resultType="com.hxq.violation.bean.Violation">
+        SELECT * FROM violation WHERE cName=#{cName}
+    </select>
+
+    <!--/**
+     * 通过车牌号查询罚单
+     * @param carNumber
+     * @return
+     */
+    public List<Violation> findAllByCarNumber(String carNumber);-->
+    <select id="findAllByCarNumber" resultType="com.hxq.violation.bean.Violation">
+        SELECT * FROM violation WHERE carNumber=#{carNumber}
+    </select>
+
+    <!-- /**
+     * 通过id将罚单更新为已支付
+     * @param id
+     * @return
+     */
+    public boolean updateIsPay1(Integer id);-->
+    <update id="updateIsPay1">
+        UPDATE violation SET isPay=1 WHERE id=#{id}
+    </update>
+
+    <!--  /**
+     * 通过警察的id查找自己开的罚单，用于警察界面查找自己的所有开过的罚单
+     * @param pId 警察的id
+     * @return罚单集合
+     */
+    public List<Violation> findAllByPid(Integer pId);
+-->
+    <select id="findAllByPid" resultType="com.hxq.violation.bean.Violation">
+        SELECT * from violation WHERE pId=#{pId}
+    </select>
+</mapper>

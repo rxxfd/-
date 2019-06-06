@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxq.violation.mapper.PoliceMapper">
+
+    <!-- /**
+     * 注册警察信息，由管理员进行操作
+     * @param police
+     * @return
+     */
+    public void insertPolice(Police police);-->
+    <insert id="insertPolice" parameterType="com.hxq.violation.bean.Police">
+        INSERT INTO police(id,name,password,phone,city) VALUES (#{police.id},#{police.name},#{police.password},#{police.phone},#{police.city})
+    </insert>
+
+    <!--/**
+     * 通过id和password查询一个警察，用于登陆
+     * @param id
+     * @param password
+     * @return
+     */
+    public Police findPoliceByIdPass(Integer id,String password);-->
+    <select id="findPoliceByIdPass" resultType="com.hxq.violation.bean.Police">
+        SELECT * FROM police WHERE id=#{id} AND password=#{password}
+    </select>
+
+    <!-- /**
+     * 查询所有的警擦
+     * @return
+     */
+    public List<Police> findAllPolices();-->
+    <select id="findAllPolices" resultType="com.hxq.violation.bean.Police">
+        SELECT * FROM police
+    </select>
+
+    <!-- /**
+     * 更新警察信息，管理员操作
+     * @param police
+     * @return
+     */
+    public void updetePolice(Police police);-->
+    <update id="updetePolice" parameterType="com.hxq.violation.bean.Police">
+        UPDATE police SET name=#{police.name},password=#{police.password},phone=#{police.phone},city=#{police.city} WHERE id=#{police.id}
+    </update>
+
+    <!--/**
+     * 通过id删除警察
+     * @param id
+     * @return
+     */
+    public void deletePolice(Integer id);-->
+    <delete id="deletePolice">
+        DELETE FROM police WHERE id=#{id}
+    </delete>
+
+    <!--   /**
+     * 通过id查询警察
+     * @param id
+     * @return
+     */
+    public Police findPoliceById(Integer id);-->
+    <select id="findPoliceById" statementType="PREPARED" resultType="com.hxq.violation.bean.Police">
+        SELECT * FROM police WHERE id=#{id}
+    </select>
+
+</mapper>
